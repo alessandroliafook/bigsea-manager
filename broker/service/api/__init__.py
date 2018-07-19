@@ -31,6 +31,7 @@ try:
     host = config.get("general", "host")
     port = config.getint('general', 'port')
     plugins = config.get('general', 'plugins').split(',')
+    users = config.get('general', 'users_path')
 
     """ Validate if really exists a section to listed plugins """
     for plugin in plugins:

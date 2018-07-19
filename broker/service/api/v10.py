@@ -25,49 +25,72 @@ API_LOG = Log("APIv10", "logs/APIv10.log")
 
 submissions = {}
 
+def new_user(data):
+    if ('username' not in data or 'password' not in data or
+            'email' not in data):
+            API_LOG.log("Missing parameters in request")
+            raise ex.BadRequestException()
+        
+        username = data['username']
+        password = data['password']
+
+        authorization = authorizer.get_authorization(api.authorization_url,
+                                                    username, password)
+
+        if not authorization['success']:
+            API_LOG.log("Unauthorized request")
+            raise ex.UnauthorizedException()
+
+        else:
+
+            user_email = data['email']
+            users = _get_authorized_users()
+            
+            if user_email not in users:
+
+                w = open(api.users, 'a')
+                w.write(user_email + '\n')
+                w.close()
+
+            else:
+                raise ex.BadRequestException('User email already in system')
+            
+            return user_email
+
+
+def validate_user(user_email):
+
+    if user_email not in _get_authorized_users():
+        raise ex.UnauthorizedException("Unauthorized user email")
+    
+    return user_email
+
+
+def _get_authorized_users():
+        
+        r = open(api.users)
+        users = r.readline().split('/n')
+        r.close()
+
+        return users
+
 
 def run_submission(data):
-    if ('username' not in data or 'password' not in data or
-        'plugin' not in data or 'plugin_info' not in data):
+    if ('plugin' not in data or 'plugin_info' not in data):
         API_LOG.log("Missing parameters in request")
         raise ex.BadRequestException()
     
-    username = data['username']
-    password = data['password']
+    if data['plugin'] not in api.plugins: raise ex.BadRequestException()
 
-    authorization = authorizer.get_authorization(api.authorization_url,
-                                                 username, password)
+    plugin = plugin_base.PLUGINS.get_plugin(data['plugin'])
+    submission_id, executor = plugin.execute(data['plugin_info'])
+    submissions[submission_id] = executor
 
-    if not authorization['success']:
-        API_LOG.log("Unauthorized request")
-        raise ex.UnauthorizedException()
-
-    else:
-        if data['plugin'] not in api.plugins: raise ex.BadRequestException()
- 
-        plugin = plugin_base.PLUGINS.get_plugin(data['plugin'])
-        submission_id, executor = plugin.execute(data['plugin_info'])
-        submissions[submission_id] = executor
-
-        return submission_id
+    return submission_id
 
 
 def stop_submission(submission_id, data):
-    if 'username' not in data or 'password' not in data:
-        API_LOG.log("Missing parameters in request")
-        raise ex.BadRequestException()
-    
-    username = data['username']
-    password = data['password']
 
-    authorization = authorizer.get_authorization(api.authorization_url,
-                                                 username, password)
-
-    if not authorization['success']:
-        API_LOG.log("Unauthorized request")
-        raise ex.UnauthorizedException()
-
-    else:
         if submission_id not in submissions.keys():
             raise ex.BadRequestException()
 

@@ -20,6 +20,21 @@ from broker.service.api import v10 as api
 rest = u.Rest('v10', __name__)
 
 
+""" Insert new user email into the system.
+
+    Normal response codes: 202
+    Error response codes: 400, 401
+"""
+@rest.post('/users')
+def new_user(data):
+    return u.render(api.new_user(data))
+
+
+@rest.get('/users/<user_email>')
+def validate_user_email(user_email):
+    return u.render(api.validate_user(user_email))
+
+
 """ Run a new submission and returns a submission id.
 
     Normal response codes: 202
