@@ -1,6 +1,46 @@
 #  REST API Endpoints
 This section provides a detailed list of avaliable endpoints in Broker REST API.
 
+## New User
+  Insert a new authorized user email into service.
+
+* **URL**: `/users`
+* **Method:** `POST`
+
+* **JSON Request:**
+	* ```javascript
+	  {
+	     username: [string],
+	     password: [string],
+	     email: [string]
+	  }
+	  ```
+* **Success Response:**
+  * **Code:** `202` <br /> **Content:** 
+	  * ```javascript
+	    {
+	       email : [string]
+	    }
+		```
+		
+* **Error Response:**
+  * **Code:** `400 BAD REQUEST` and `401 UNAUTHORIZED`<br />
+
+## Validate User
+  Check if the user email already authorized in the system.
+
+* **URL**: `/users/:user_email`
+* **Method:** `GET`
+* **Success Response:**
+  * **Code:** `202` <br /> **Content:** 
+	  * ```javascript
+	    {
+	       email : [string]
+	    }
+		```
+* **Error Response:**
+  * **Code:** `400 BAD REQUEST` and `401 UNAUTHORIZED`<br />
+
 ## Submit and run
   Run a submission and returns json data with id of submission.
 
@@ -10,8 +50,6 @@ This section provides a detailed list of avaliable endpoints in Broker REST API.
 * **JSON Request:**
 	* ```javascript
 	  {
-	     username : [string],
-	     password : [string],
 	     plugin: [string],
 	     plugin_info : {
 	         ...
@@ -35,14 +73,6 @@ This section provides a detailed list of avaliable endpoints in Broker REST API.
 
 * **URL**: `/submissions/:id/stop`
 * **Method:** `PUT`
-
-* **JSON Request:**
-	* ```javascript
-	  {
-	     username : [string],
-	     password : [string]
-	  }
-	  ```
 * **Success Response:**
   * **Code:** `204` <br />
 		
