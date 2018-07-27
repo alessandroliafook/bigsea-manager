@@ -7,34 +7,21 @@
         <div class="box">
           <figure class="avatar">
             <br>
-            <h3 class="title has-text-grey">BigSea</h3>
+            <h3 class="title has-text-info">🌊 BigSea 🌊</h3>
             <br>
           </figure>
-          <form>
-            <div class="field">
-              <div class="control">
-                <input class="input is-large" type="text" placeholder="username" autofocus="">
-              </div>
-            </div>
-
-            <div class="field">
-              <div class="control">
-                <input class="input is-large" type="password" placeholder="password">
-              </div>
-            </div>
-      
-            <button class="button is-block is-dark is-large is-fullwidth" (click)="loginWithUsername()">
-              Login
-            </button>
-          </form>
-          <hr class="hr-text" data-content="OR">
           <button class="button is-block is-danger is-large is-fullwidth" (click)="loginWithGoogle()">
               <span class="icon">
                   <i class="fab fa-google"></i>
                 </span>
                 &nbsp;Login with Google
           </button>
+          <br>
         </div>
+        <p class="has-text-grey">
+            &nbsp;·&nbsp;
+            <a routerLink="/register">REGISTER A NEW USER</a> &nbsp;·&nbsp;
+        </p>
       </div>
     </div>
   </div>

@@ -1,0 +1,47 @@
+<section class="RegisterComponent hero is-black is-fullheight">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="column is-4 is-offset-4">
+        <h3 class="title">Register</h3>
+        <p class="subtitle has-text-grey">You need the admin's username and password to register users</p>
+        <div class="box">
+          <figure class="avatar">
+            <br>
+            <h3 class="title has-text-info">🌊 BigSea 🌊</h3>
+            <br>
+          </figure>
+          <form>
+            <div class="field">
+              <div class="control">
+                <input class="input is-large" type="text" placeholder="username" autofocus="">
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <input class="input is-large" type="password" placeholder="password">
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <input class="input is-large" type="text" placeholder="email" autofocus="">
+              </div>
+            </div>
+            
+            <br>
+            <button class="button is-block is-dark is-large is-fullwidth" (click)="register()">
+              Register
+            </button>
+            <br>
+
+          </form>
+        </div>
+        <p class="has-text-grey">
+            &nbsp;·&nbsp;
+            <a routerLink="/">LOGIN WITH AUTH USER</a> &nbsp;·&nbsp;
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

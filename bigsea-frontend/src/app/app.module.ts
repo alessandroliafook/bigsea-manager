@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SubmissionsComponent } from './components/submissions/submissions.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SubmissionsComponent } from './components/submissions/submissions.compo
     LoginComponent,
     NotFoundComponent,
     SubmissionsComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

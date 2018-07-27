@@ -15,10 +15,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  loginWithUsername(){
-    this.successLoginRedirect();
-  }
-
   loginWithGoogle(){
     this.successLoginRedirect();
   }
