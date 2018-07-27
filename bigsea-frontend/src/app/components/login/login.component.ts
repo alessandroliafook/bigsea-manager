@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SessionService } from '../../services/session.service';
 
 @Component({
   selector: 'app-login',
@@ -9,18 +10,18 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private sessionService: SessionService
   ) { }
 
   ngOnInit() {
+    if(this.sessionService.isSignedIn()){
+      this.router.navigate(['/submissions']);
+    }
   }
 
-  loginWithGoogle(){
-    this.successLoginRedirect();
-  }
-
-  successLoginRedirect(){
-    this.router.navigate(['/submissions']);
+  signInWithGoogle(){
+    this.sessionService.signIn();
   }
 
 }

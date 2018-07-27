@@ -3,8 +3,11 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
+import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login'
+
 import { UserService } from './services/user.service';
 import { SubmissionService } from './services/submission.service';
+import { SessionService } from './services/session.service';
 
 import { routing } from './config/routes.config';
 
@@ -13,6 +16,17 @@ import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SubmissionsComponent } from './components/submissions/submissions.component';
 import { RegisterComponent } from './components/register/register.component';
+
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('296465468035-a9imidndm0olna0ordgb8ouq64l40ohf.apps.googleusercontent.com')
+  },
+])
+
+export function provideConfig(){
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -26,11 +40,17 @@ import { RegisterComponent } from './components/register/register.component';
     BrowserModule,
     routing,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    SocialLoginModule
   ],
   providers: [
     UserService,
-    SubmissionService
+    SubmissionService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    },
+    SessionService
   ],
   bootstrap: [AppComponent]
 })
