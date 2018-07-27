@@ -23,10 +23,17 @@
               </div>
             </div>
       
-            <button class="button is-block is-dark is-large is-fullwidth">Login</button>
+            <button class="button is-block is-dark is-large is-fullwidth" (click)="loginWithUsername()">
+              Login
+            </button>
           </form>
           <hr class="hr-text" data-content="OR">
-          <button class="button is-block is-danger is-large is-fullwidth">Login with Google</button>
+          <button class="button is-block is-danger is-large is-fullwidth" (click)="loginWithGoogle()">
+              <span class="icon">
+                  <i class="fab fa-google"></i>
+                </span>
+                &nbsp;Login with Google
+          </button>
         </div>
       </div>
     </div>
