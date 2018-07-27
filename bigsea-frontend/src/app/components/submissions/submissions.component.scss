@@ -1,25 +1,41 @@
 .SubmissionComponent {
-  background: #041221;
+  nav{
+    z-index: 99999999;
+  }
+
   .card {
-    //height: 200px !important;
-    //width: 400px;
     right: 20px;
     top: 80px;
     -webkit-backface-visibility: hidden;
     backface-visibility: initial;
     border-radius: 5px;
-    position: absolute;
+    position: fixed;
     z-index: 999;
     text-align: center;
     .is-circle{
         border-radius: 50% !important;
     }
   }
+
+  .submission-list{
+    width: 40%;
+    z-index: 999;
+    position: absolute;
+    left: 30%;
+    top: 80px;
+    .submission-list-item{
+      color: white;
+      background-color: #041221;
+      margin-bottom: 20px;
+      padding: 20px;
+    }
+  }
+
   #flow span {
     display: block;
     width: 200vw;
     height: 200vw;
-    position: absolute;
+    position: fixed;
     top: -180vw;
     left: -50vw;
     border-radius: 90vw;
