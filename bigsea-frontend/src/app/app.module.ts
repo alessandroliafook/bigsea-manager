@@ -16,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SubmissionsComponent } from './components/submissions/submissions.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AuthGuard } from './guards/auth.guard';
 
 let config = new AuthServiceConfig([
   {
@@ -50,7 +51,8 @@ export function provideConfig(){
       provide: AuthServiceConfig,
       useFactory: provideConfig
     },
-    SessionService
+    SessionService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
