@@ -1,4 +1,60 @@
-<p>
-  submissions works!
-</p>
-<button class="button" (click)="signOut()">SignOut</button>
+<section class="SubmissionComponent">
+  <nav class="navbar is-black">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item brand-text">
+          🌊 BigSea
+        </a>
+        <div class="navbar-burger burger" data-target="navMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div id="navMenu" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item">
+            Register User
+          </a>
+          <a class="navbar-item">
+            New Submission
+          </a>
+          <a class="navbar-item">
+            Reload Submissions
+          </a>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="field is-grouped">
+              <p class="control">
+                <a class="button is-danger" (click)="signOut()">
+                  <span class="icon">
+                    <i class="fas fa-sign-out-alt"></i>
+                  </span>
+                  <span>SignOut</span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="card">
+    <div class="card-content">
+      <img [src]="user.photoUrl" class="is-circle" alt="Image">
+      <p class="title is-6">{{user.name}}</p>
+      <p class="subtitle is-6">{{user.email}}</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="flow">
+      <span class="flow-1"></span>
+      <span class="flow-2"></span>
+      <span class="flow-3"></span>
+    </div>
+  </div>
+
+</section>

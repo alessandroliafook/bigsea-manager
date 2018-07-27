@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../../services/session.service';
 import { Router } from '../../../../node_modules/@angular/router';
+import { BigseaUser } from '../../model/bigsea-user.model';
 
 @Component({
   selector: 'app-submissions',
@@ -9,10 +10,14 @@ import { Router } from '../../../../node_modules/@angular/router';
 })
 export class SubmissionsComponent implements OnInit {
 
+  user: BigseaUser;
+
   constructor(
     private router: Router,
     private sessionService: SessionService
-  ) { }
+  ) { 
+    this.user = sessionService.recoveryUserFromStorage();
+  }
 
   ngOnInit() {
   }
