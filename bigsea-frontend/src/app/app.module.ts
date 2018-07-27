@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
+import { UserService } from './services/user.service';
 import { SubmissionService } from './services/submission.service';
 
 import { routing } from './config/routes.config';
@@ -25,7 +26,10 @@ import { SubmissionsComponent } from './components/submissions/submissions.compo
     RouterModule,
     HttpClientModule
   ],
-  providers: [SubmissionService],
+  providers: [
+    UserService,
+    SubmissionService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
