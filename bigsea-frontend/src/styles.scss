@@ -1,9 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
-
+/* ««« Global Imports »»» */
 @import '../node_modules/bulma/bulma.sass';
 
+/* ««« Global Decl »»» */
 body{
-    background-color: #2F3242 !important;
-    color: white;
+    width: 100%;
     height: 100vh;
 }
