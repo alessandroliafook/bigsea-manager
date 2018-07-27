@@ -19,6 +19,7 @@ from broker.utils.logger import Log
 from broker.utils.framework import authorizer
 from broker.utils.framework import optimizer
 from broker import exceptions as ex
+import os.path as path
 
 
 API_LOG = Log("APIv10", "logs/APIv10.log")
@@ -31,31 +32,39 @@ def new_user(data):
             API_LOG.log("Missing parameters in request")
             raise ex.BadRequestException()
         
-        username = data['username']
-        password = data['password']
+    username = data['username']
+    password = data['password']
 
-        authorization = authorizer.get_authorization(api.authorization_url,
-                                                    username, password)
+    # authorization = authorizer.get_authorization(api.authorization_url,
+    #                                             username, password)
 
-        if not authorization['success']:
-            API_LOG.log("Unauthorized request")
-            raise ex.UnauthorizedException()
+    sucess = api.user == username and api.password == password
+    authorization = {'success':sucess}
+
+    if not authorization['success']:
+        API_LOG.log("Unauthorized request")
+        raise ex.UnauthorizedException()
+
+    else:
+
+        user_email = data['email']
+        users = _get_authorized_users()
+        
+        if user_email not in users:
+
+            if users:
+                save_email = ';' + user_email
+            else:
+                save_email = user_email
+
+            w = open(api.users, 'a')
+            w.write(save_email)
+            w.close()
 
         else:
-
-            user_email = data['email']
-            users = _get_authorized_users()
-            
-            if user_email not in users:
-
-                w = open(api.users, 'a')
-                w.write(user_email + '\n')
-                w.close()
-
-            else:
-                raise ex.BadRequestException('User email already in system')
-            
-            return user_email
+            raise ex.BadRequestException('User email already in system')
+        
+        return user_email
 
 
 def validate_user(user_email):
@@ -67,13 +76,20 @@ def validate_user(user_email):
 
 
 def _get_authorized_users():
+
+        if path.isfile(api.users): 
+            r = open(api.users)
+            users = r.readline().split(';')
+            print users
+            r.close()
+
+            return users
         
-        r = open(api.users)
-        users = r.readline().split('/n')
-        r.close()
+        else:
+            r = open(api.users, "w")
+            r.close()
 
-        return users
-
+            return []
 
 def run_submission(data):
     if ('plugin' not in data or 'plugin_info' not in data):

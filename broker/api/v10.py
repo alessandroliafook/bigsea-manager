@@ -19,6 +19,13 @@ from broker.service.api import v10 as api
 
 rest = u.Rest('v10', __name__)
 
+@rest.post('/hello')
+def hello(data):
+    user_email = str(u.flask.request.headers['Authorization'])
+    api.validate_user(user_email)
+    username = data['username']
+    hello = 'Hello ' + str(username) + " " + str(user_email)
+    return u.render(hello)
 
 """ Insert new user email into the system.
 
@@ -30,8 +37,9 @@ def new_user(data):
     return u.render(api.new_user(data))
 
 
-@rest.get('/users/<user_email>')
-def validate_user_email(user_email):
+@rest.get('/users')
+def validate_user_email():
+    user_email = str(u.flask.request.headers['Authorization'])
     return u.render(api.validate_user(user_email))
 
 
@@ -42,6 +50,10 @@ def validate_user_email(user_email):
 """
 @rest.post('/submissions')
 def run_submission(data):
+
+    user_email = str(u.flask.request.headers['Authorization'])
+    api.validate_user(user_email)
+
     return u.render(api.run_submission(data)) 
 
 
@@ -52,6 +64,10 @@ def run_submission(data):
 """
 @rest.put('/submissions/<submission_id>/stop')
 def stop_submission(submission_id, data):
+
+    user_email = str(u.flask.request.headers['Authorization'])
+    api.validate_user(user_email)
+
     return u.render(api.stop_submission(submission_id, data))
 
 
@@ -62,6 +78,10 @@ def stop_submission(submission_id, data):
 """
 @rest.get('/submissions')
 def list_submissions():
+
+    user_email = str(u.flask.request.headers['Authorization'])
+    api.validate_user(user_email)
+
     return u.render(api.list_submissions())
 
 
@@ -72,6 +92,10 @@ def list_submissions():
 """
 @rest.get('/submissions/<submission_id>')
 def submission_status(submission_id):
+
+    user_email = str(u.flask.request.headers['Authorization'])
+    api.validate_user(user_email)
+
     return u.render(api.submission_status(submission_id))
 
 
@@ -82,4 +106,8 @@ def submission_status(submission_id):
 """
 @rest.get('/submissions/<submission_id>/log')
 def submission_log(submission_id):
+
+    user_email = str(u.flask.request.headers['Authorization'])
+    api.validate_user(user_email)
+
     return u.render(api.submission_log(submission_id))

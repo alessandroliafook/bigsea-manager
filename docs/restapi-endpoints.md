@@ -9,11 +9,11 @@ This section provides a detailed list of avaliable endpoints in Broker REST API.
 
 * **JSON Request:**
 	* ```javascript
-	  {
+		{
 	     username: [string],
 	     password: [string],
 	     email: [string]
-	  }
+	  }	
 	  ```
 * **Success Response:**
   * **Code:** `202` <br /> **Content:** 
@@ -50,11 +50,20 @@ This section provides a detailed list of avaliable endpoints in Broker REST API.
 * **JSON Request:**
 	* ```javascript
 	  {
-	     plugin: [string],
-	     plugin_info : {
+			headers : 
+			{
+				Authorization : [string]
+			},
+
+	  	body : 
+			{
+	    		plugin: [string],
+	     		plugin_info : 
+				{
 	         ...
-	     }
-	  }
+	     		}
+			}
+		}
 	  ```
 * **Success Response:**
   * **Code:** `202` <br /> **Content:** 
@@ -86,16 +95,25 @@ This section provides a detailed list of avaliable endpoints in Broker REST API.
 * **Method:** `GET`
 * **Success Response:**
   * **Code:** `200` <br /> **Content:** 
-	  * ```javascript
-	    {
-	       submission1 : {
-	          status: [string]
-	       },
-     	       ...
-	       submissionN : {
-	          status: [string]
-	       }		 
-	    }
+	  * ```javascript		
+		{ 
+			headers : 
+			{ 
+				Authorization : [string] 
+			},
+	  	
+			body :
+			{
+			  submission1 : 
+					{
+					status: [string]
+					},	
+			  submissionN : 
+					{
+					status: [string]
+					}
+			}
+		}
 		```
 
 ## Submission status
@@ -106,13 +124,22 @@ This section provides a detailed list of avaliable endpoints in Broker REST API.
 * **Success Response:**
   * **Code:** `200` <br /> **Content:** 
 	  * ```javascript
-	    {
-	       status : [string],
-	       execution_time : [string],
-	       start_time : [string]
-	    }
+		{
+			headers : 
+			{
+				Authorization : [string]
+			},
+			
+			body :
+			{
+	  	    		status : [string],
+	    	   	execution_time : [string],
+	      	 	start_time : [string]
+	    	}
+		}
 		```
-		
+
+
 * **Error Response:**
   * **Code:** `400 BAD REQUEST` <br />
 
@@ -124,11 +151,19 @@ This section provides a detailed list of avaliable endpoints in Broker REST API.
 * **Success Response:**
   * **Code:** `200` <br /> **Content:** 
 	  * ```javascript
-	    {
-	       execution : [string],
-  	       stderr : [string],
-  	       stdout : [string]
-	    }
+		{
+			headers : 
+			{
+				Authorization : [string]
+			},
+			
+			body :
+	    	{
+					execution : [string],
+					stderr : [string],
+					stdout : [string]
+	    	}
+		}
 		```
 		
 * **Error Response:**
