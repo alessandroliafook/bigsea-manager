@@ -38,8 +38,10 @@ def new_user(data):
     # authorization = authorizer.get_authorization(api.authorization_url,
     #                                             username, password)
 
-    sucess = api.user == username and api.password == password
+    sucess = api.user_admin == username and api.password_admin == password
     authorization = {'success':sucess}
+
+    import pdb; pdb.set_trace()
 
     if not authorization['success']:
         API_LOG.log("Unauthorized request")

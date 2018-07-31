@@ -28,8 +28,8 @@ try:
     optimizer_url = config.get('services', 'optimizer_url')
     
     """Admin configuration"""
-    user = config.get('admin', 'user')
-    password = config.get('admin', 'password')
+    user_admin = config.get('admin', 'user')
+    password_admin = config.get('admin', 'password')
     
     """ General configuration """
     host = config.get("general", "host")
