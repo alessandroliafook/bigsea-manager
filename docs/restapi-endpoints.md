@@ -82,6 +82,15 @@ This section provides a detailed list of avaliable endpoints in Broker REST API.
 
 * **URL**: `/submissions/:id/stop`
 * **Method:** `PUT`
+* **JSON Request:**
+	* ```javascript
+	  {
+			headers : 
+			{
+				Authorization : [string]
+			},
+		}
+	  ```
 * **Success Response:**
   * **Code:** `204` <br />
 		
@@ -93,6 +102,15 @@ This section provides a detailed list of avaliable endpoints in Broker REST API.
 
 * **URL**: `/submissions`
 * **Method:** `GET`
+* **JSON Request:**
+	* ```javascript
+	  {
+			headers : 
+			{
+				Authorization : [string]
+			},
+		}
+	  ```
 * **Success Response:**
   * **Code:** `200` <br /> **Content:** 
 	  * ```javascript		
@@ -121,6 +139,15 @@ This section provides a detailed list of avaliable endpoints in Broker REST API.
 
 * **URL**: `/submissions/:id`
 * **Method:** `GET`
+* **JSON Request:**
+	* ```javascript
+	  {
+			headers : 
+			{
+				Authorization : [string]
+			},
+		}
+	  ```
 * **Success Response:**
   * **Code:** `200` <br /> **Content:** 
 	  * ```javascript
@@ -148,6 +175,15 @@ This section provides a detailed list of avaliable endpoints in Broker REST API.
 
 * **URL**: `/submissions/:id/log`
 * **Method:** `GET`
+* **JSON Request:**
+	* ```javascript
+	  {
+			headers : 
+			{
+				Authorization : [string]
+			},
+		}
+	  ```
 * **Success Response:**
   * **Code:** `200` <br /> **Content:** 
 	  * ```javascript
@@ -165,6 +201,5 @@ This section provides a detailed list of avaliable endpoints in Broker REST API.
 	    	}
 		}
 		```
-		
 * **Error Response:**
   * **Code:** `400 BAD REQUEST` <br />
