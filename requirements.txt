@@ -16,3 +16,4 @@ python-monascaclient
 keystoneauth1
 pytz
 pytest
+flask_cors

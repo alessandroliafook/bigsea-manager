@@ -26,7 +26,7 @@ from broker.utils.ids import ID_Generator
 from broker.plugins.base import GenericApplicationExecutor
 
 
-LOG = Log("DeveloperPlugin", "logs/developer_plugin.log")
+LOG = Log("OpenStackPlugin", "logs/developer_plugin.log")
 application_time_log = Log("Application_time", "logs/application_time.log")
 configure_logging()
 
@@ -134,15 +134,15 @@ class OpenStackApplicationExecutor(GenericApplicationExecutor):
         return conn
 
 
-class DeveloperProvider(base.PluginInterface):
+class OpenStackGenericProvider(base.PluginInterface):
     def __init__(self):
         self.id_generator = ID_Generator()
 
     def get_title(self):
-        return 'Developer Plugin'
+        return 'OpenStack Plugin'
 
     def get_description(self):
-        return 'Developer Plugin'
+        return 'OpenStack Plugin'
 
     def to_dict(self):
         return {
@@ -152,9 +152,9 @@ class DeveloperProvider(base.PluginInterface):
         }
 
     def execute(self, data):
-        executor = DeveloperApplicationExecutor()
+        executor = OpenStackApplicationExecutor()
         handling_thread = threading.Thread(target=executor.start_application,
                                            args=(data,))
         handling_thread.start()
-        app_id = "developer" + self.id_generator.get_ID()
+        app_id = "os" + self.id_generator.get_ID()
         return (app_id, executor)
