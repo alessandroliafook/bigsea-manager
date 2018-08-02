@@ -16,7 +16,7 @@
           <a class="navbar-item" (click)="toggleUserRegistration()">
             Register User
           </a>
-          <a class="navbar-item">
+          <a class="navbar-item" (click)="toggleSubSelection()">
             New Submission
           </a>
           <a class="navbar-item">
@@ -73,6 +73,7 @@
 
 </section>
 
+<!--NEW USER MODAL-->
 
 <div class="modal" style="z-index: 10001;" [ngClass]="{'is-active': isCreatingUser }">
   <div class="modal-background"></div>
@@ -109,6 +110,67 @@
     </footer>
   </div>
 </div>
+
+<!--NEW USER MODAL-->
+
+
+<!--NEW SUBMISSION MODAL-->
+
+<div class="modal" style="z-index: 10001;" [ngClass]="{'is-active': isSelectingSubType }">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">New Submission</p>
+      <button class="delete" aria-label="close" (click)="toggleSubSelection()"></button>
+    </header>
+    <section class="modal-card-body">
+
+      <div *ngIf="submission.type !== '1'" class="field">
+        <div class="field">
+          <div class="control">
+            <input class="input" type="text" placeholder="Enter submission id" [(ngModel)]="submission.id">
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="submission.type === '1'" class="field">
+        <div class="field">
+          <div class="control">
+            <input class="input" type="text" placeholder="Enter plugin" [(ngModel)]="submission.plugin">
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <input class="input" type="text" placeholder="Enter plugin info" [(ngModel)]="submission.plugin_info">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="field">
+        <div class="control">
+          <div class="select">
+            <select name="subTypeSelect" [(ngModel)]="submission.type">
+              <option value="1"> Submit and Run</option>
+              <option value="2"> Stop</option>
+              <option value="3"> Status</option>
+              <option value="4"> Log</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success" (click)="sendSubmission()">Submit</button>
+      <button class="button" (click)="toggleSubSelection()">Cancel</button>
+    </footer>
+  </div>
+</div>
+
+<!--NEW SUBMISSION MODAL-->
 
 <div class="notification is-info" [ngClass]="{'is-hidden': !showNotification}" style="z-index: 999999999">
   <button class="delete" (click)="dismissNotification()"></button>

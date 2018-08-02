@@ -3,6 +3,8 @@ import { SessionService } from '../../services/session.service';
 import { Router } from '../../../../node_modules/@angular/router';
 import { BigseaUser } from '../../model/bigsea-user.model';
 import {UserService} from '../../services/user.service';
+import {SubmissionService} from '../../services/submission.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-submissions',
@@ -15,17 +17,25 @@ export class SubmissionsComponent implements OnInit {
   isCreatingUser = false;
   notification = '';
   showNotification = false;
+  isSelectingSubType = false;
   user: any = {
     username: '',
     password: '',
     email: ''
   };
 
+  submission: any = {
+    id: '',
+    plugin: '',
+    plugin_info: '',
+    type: '1'
+  };
 
   constructor(
     private router: Router,
     private sessionService: SessionService,
-    private userService: UserService
+    private userService: UserService,
+    private submissionService: SubmissionService
   ) {
     this.bigseaUser = sessionService.recoveryUserFromStorage();
   }
@@ -50,8 +60,45 @@ export class SubmissionsComponent implements OnInit {
     });
   }
 
+  sendSubmission() {
+
+    let obs;
+    switch (this.submission.type) {
+
+      case '1':
+        obs = this.submissionService.submitAndRun(this.submission);
+        break;
+
+      case '2':
+        obs = this.submissionService.stopSubmission(this.submission.id);
+        break;
+
+      case '3':
+        obs = this.submissionService.submissionStatus(this.submission.id);
+        break;
+
+      case '4':
+        obs = this.submissionService.submissionLog(this.submission.id);
+        break;
+
+    }
+
+    obs.subscribe((result) => {
+
+    },
+
+    (err) => {
+
+    });
+
+  }
+
   toggleUserRegistration() {
     this.isCreatingUser = !this.isCreatingUser;
+  }
+
+  toggleSubSelection() {
+    this.isSelectingSubType = !this.isSelectingSubType;
   }
 
   dismissNotification() {

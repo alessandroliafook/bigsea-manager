@@ -17,6 +17,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SubmissionsComponent } from './components/submissions/submissions.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
+import {FormsModule} from '@angular/forms';
 
 let config = new AuthServiceConfig([
   {
@@ -42,6 +43,7 @@ export function provideConfig(){
     routing,
     RouterModule,
     HttpClientModule,
+    FormsModule,
     SocialLoginModule
   ],
   providers: [
