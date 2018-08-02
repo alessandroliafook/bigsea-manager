@@ -16,10 +16,10 @@
           <a class="navbar-item" (click)="toggleUserRegistration()">
             Register User
           </a>
-          <a class="navbar-item" (click)="toggleSubSelection()">
+          <a class="navbar-item" (click)="toggleSubmission()">
             New Submission
           </a>
-          <a class="navbar-item">
+          <a class="navbar-item" (click)="reloadSubmissions()">
             Reload Submissions
           </a>
         </div>
@@ -57,14 +57,9 @@
     </div>
 
     <section class="submission-list">
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
+
+      <div class="submission-list-item" *ngFor="let submission of submissions">
+        {{submission.status}}
       </div>
 
     </section>
@@ -121,7 +116,7 @@
   <div class="modal-card">
     <header class="modal-card-head">
       <p class="modal-card-title">New Submission</p>
-      <button class="delete" aria-label="close" (click)="toggleSubSelection()"></button>
+      <button class="delete" aria-label="close" (click)="toggleSubmission()"></button>
     </header>
     <section class="modal-card-body">
 
@@ -165,7 +160,7 @@
     </section>
     <footer class="modal-card-foot">
       <button class="button is-success" (click)="sendSubmission()">Submit</button>
-      <button class="button" (click)="toggleSubSelection()">Cancel</button>
+      <button class="button" (click)="toggleSubmission()">Cancel</button>
     </footer>
   </div>
 </div>

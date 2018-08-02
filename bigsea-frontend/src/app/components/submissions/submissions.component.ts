@@ -31,6 +31,8 @@ export class SubmissionsComponent implements OnInit {
     type: '1'
   };
 
+  submissions: any = [];
+
   constructor(
     private router: Router,
     private sessionService: SessionService,
@@ -41,6 +43,11 @@ export class SubmissionsComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.submissionService.listSubmissions().subscribe(result => {
+      this.submissions = result;
+    });
+
   }
 
   signOut() {
@@ -60,36 +67,54 @@ export class SubmissionsComponent implements OnInit {
     });
   }
 
+  reloadSubmissions() {
+    this.submissionService.listSubmissions().subscribe((result) => {
+      this.submissions = result;
+    });
+  }
+
   sendSubmission() {
 
     let obs;
     switch (this.submission.type) {
 
       case '1':
-        obs = this.submissionService.submitAndRun(this.submission);
+        // obs = this.submissionService.submitAndRun(this.submission);
+        this.submissions.push({status: 'Submit and Run'});
         break;
 
       case '2':
-        obs = this.submissionService.stopSubmission(this.submission.id);
+        // obs = this.submissionService.stopSubmission(this.submission.id);
+        this.submissions.push({status: 'Stop'});
         break;
 
       case '3':
-        obs = this.submissionService.submissionStatus(this.submission.id);
+        // obs = this.submissionService.submissionStatus(this.submission.id);
+        this.submissions.push({status: 'Status'});
         break;
 
       case '4':
-        obs = this.submissionService.submissionLog(this.submission.id);
+        // obs = this.submissionService.submissionLog(this.submission.id);
+        this.submissions.push({status: 'Log'});
         break;
 
     }
 
-    obs.subscribe((result) => {
+    // TODO: descomentar
+    // obs.subscribe((result) => {
+    //
+    // },
+    //
+    // (err) => {
+    //
+    // },
+    //
+    // () => {
+    //   this.toggleSubmission();
+    // });
 
-    },
-
-    (err) => {
-
-    });
+    // TODO: remover
+    this.toggleSubmission();
 
   }
 
@@ -97,7 +122,7 @@ export class SubmissionsComponent implements OnInit {
     this.isCreatingUser = !this.isCreatingUser;
   }
 
-  toggleSubSelection() {
+  toggleSubmission() {
     this.isSelectingSubType = !this.isSelectingSubType;
   }
 
