@@ -15,9 +15,11 @@
 
 from broker.utils import api as u
 from broker.service.api import v10 as api
+from flask_cors import CORS
 
 
 rest = u.Rest('v10', __name__)
+CORS(rest)
 
 @rest.post('/hello')
 def hello(data):
