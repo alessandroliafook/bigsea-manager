@@ -79,43 +79,35 @@ export class SubmissionsComponent implements OnInit {
     switch (this.submission.type) {
 
       case '1':
-        // obs = this.submissionService.submitAndRun(this.submission);
-        this.submissions.push({status: 'Submit and Run'});
+        obs = this.submissionService.submitAndRun(this.submission);
         break;
 
       case '2':
-        // obs = this.submissionService.stopSubmission(this.submission.id);
-        this.submissions.push({status: 'Stop'});
+        obs = this.submissionService.stopSubmission(this.submission.id);
         break;
 
       case '3':
-        // obs = this.submissionService.submissionStatus(this.submission.id);
-        this.submissions.push({status: 'Status'});
+        obs = this.submissionService.submissionStatus(this.submission.id);
         break;
 
       case '4':
-        // obs = this.submissionService.submissionLog(this.submission.id);
-        this.submissions.push({status: 'Log'});
+        obs = this.submissionService.submissionLog(this.submission.id);
         break;
 
     }
 
-    // TODO: descomentar
-    // obs.subscribe((result) => {
-    //
-    // },
-    //
-    // (err) => {
-    //
-    // },
-    //
-    // () => {
-    //   this.toggleSubmission();
-    // });
-
-    // TODO: remover
-    this.toggleSubmission();
-
+    obs.subscribe((result) => {
+      this.toggleSubmission();
+      console.log(result);
+    },
+    
+    (err) => {
+      this.toggleSubmission();
+    },
+    
+    () => {
+      this.toggleSubmission();
+    });
   }
 
   toggleUserRegistration() {
