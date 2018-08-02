@@ -11,7 +11,7 @@ import { BigseaUser } from '../../model/bigsea-user.model';
 export class SubmissionsComponent implements OnInit {
 
   user: BigseaUser;
-
+  isCreatingUser : boolean = false;
   constructor(
     private router: Router,
     private sessionService: SessionService
@@ -26,5 +26,11 @@ export class SubmissionsComponent implements OnInit {
     this.sessionService.signOut();
     this.router.navigate(['/']);
   }
+
+  registerUser() {
+    this.isCreatingUser = true;
+  }
+
+
 
 }

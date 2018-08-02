@@ -13,7 +13,7 @@
       </div>
       <div id="navMenu" class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item">
+          <a class="navbar-item" (click)="registerUser()">
             Register User
           </a>
           <a class="navbar-item">
@@ -66,72 +66,27 @@
       <div class="submission-list-item">
         Submission
       </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
-      <div class="submission-list-item">
-        Submission
-      </div>
 
     </section>
 
   </div>
 
 </section>
+
+
+<div class="modal" style="z-index: 10001;" [ngClass]="{'is-active': isCreatingUser }" >
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Modal title</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success">Save changes</button>
+        <button class="button">Cancel</button>
+      </footer>
+    </div>
+  </div>
