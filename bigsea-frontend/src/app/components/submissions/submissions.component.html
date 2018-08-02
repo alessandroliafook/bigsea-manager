@@ -13,7 +13,7 @@
       </div>
       <div id="navMenu" class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item" (click)="registerUser()">
+          <a class="navbar-item" (click)="toggleUserRegistration()">
             Register User
           </a>
           <a class="navbar-item">
@@ -43,9 +43,9 @@
 
   <div class="card">
     <div class="card-content">
-      <img [src]="user.photoUrl" class="is-circle" alt="Image">
-      <p class="title is-6">{{user.name}}</p>
-      <p class="subtitle is-6">{{user.email}}</p>
+      <img [src]="bigseaUser.photoUrl" class="is-circle" alt="Image">
+      <p class="title is-6">{{bigseaUser.name}}</p>
+      <p class="subtitle is-6">{{bigseaUser.email}}</p>
     </div>
   </div>
 
@@ -74,19 +74,43 @@
 </section>
 
 
-<div class="modal" style="z-index: 10001;" [ngClass]="{'is-active': isCreatingUser }" >
-    <div class="modal-background"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">Modal title</p>
-        <button class="delete" aria-label="close"></button>
-      </header>
-      <section class="modal-card-body">
-        
-      </section>
-      <footer class="modal-card-foot">
-        <button class="button is-success">Save changes</button>
-        <button class="button">Cancel</button>
-      </footer>
-    </div>
+<div class="modal" style="z-index: 10001;" [ngClass]="{'is-active': isCreatingUser }">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Register User</p>
+      <button class="delete" aria-label="close" (click)="toggleUserRegistration()"></button>
+    </header>
+    <section class="modal-card-body">
+
+      <div class="field">
+        <div class="control">
+          <input class="input" type="text" placeholder="Enter username" ngModel="user.username">
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <input class="input" type="password" placeholder="Enter password" ngModel="user.password">
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <input class="input" type="email" placeholder="Enter email" ngModel="user.email">
+        </div>
+      </div>
+
+
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success" (click)="registerUser()">Submit</button>
+      <button class="button" (click)="toggleUserRegistration()">Cancel</button>
+    </footer>
   </div>
+</div>
+
+<div class="notification is-info" [ngClass]="{'is-hidden': !showNotification}" style="z-index: 999999999">
+  <button class="delete" (click)="dismissNotification()"></button>
+  {{notification}}
+</div>

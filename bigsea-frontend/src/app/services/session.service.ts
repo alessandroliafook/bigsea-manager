@@ -7,7 +7,7 @@ import { Router } from '../../../node_modules/@angular/router';
 
 @Injectable()
 export class SessionService {
-    
+
     private url = apiConfig.apiUrl + "/users";
 
     constructor(
@@ -20,24 +20,24 @@ export class SessionService {
         this.socialAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then(
             user => {
                 let authUser = new BigseaUser(user.email, user.name, user.photoUrl);
-                localStorage.setItem('user', JSON.stringify(authUser));
+                localStorage.setItem('bigseaUser', JSON.stringify(authUser));
                 this.router.navigate(['/submissions']);
             }
         );
     }
 
     signOut(){
-        localStorage.removeItem('user');
+        localStorage.removeItem('bigseaUser');
         this.socialAuth.signOut();
     }
 
     recoveryUserFromStorage(){
-        let user: BigseaUser = JSON.parse(localStorage.getItem('user'))
+        let user: BigseaUser = JSON.parse(localStorage.getItem('bigseaUser'))
         return user;
     }
 
     isSignedIn(){
-        return localStorage.getItem('user') !== null;
+        return localStorage.getItem('bigseaUser') !== null;
     }
 
 }

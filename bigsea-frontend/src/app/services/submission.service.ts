@@ -4,11 +4,11 @@ import { apiConfig } from '../config/api.config';
 
 @Injectable()
 export class SubmissionService {
-    
-    private url = apiConfig.apiUrl + "/submissions";
+
+    private url = apiConfig.apiUrl + '/submissions';
 
     constructor(private httpClient: HttpClient) { }
-    
+
     /**
      * Run a submission and returns json data with id of submission.
      * @param submission {
@@ -16,10 +16,10 @@ export class SubmissionService {
      *  plugin_info: { ... }
      * }
      * @returns <Observable> {
-     *  id: [string] 
+     *  id: [string]
      * }
      */
-    submitAndRun(submission){
+    submitAndRun(submission) {
         return this.httpClient.post(this.url, submission);
     }
 
@@ -28,8 +28,8 @@ export class SubmissionService {
      * @param id : string
      * @returns <Observable> {}
      */
-    stopSubmission(id){
-        let user = {};
+    stopSubmission(id) {
+        const user = {};
         return this.httpClient.put(this.url + '/' + id + '/stop', user);
     }
 
@@ -41,7 +41,7 @@ export class SubmissionService {
      *  submissionN : { status: [string]}
      * }
      */
-    listSubmissions(){
+    listSubmissions() {
         return this.httpClient.get(this.url);
     }
 
@@ -54,7 +54,7 @@ export class SubmissionService {
      *  start_time : [string]
      * }
      */
-    submissionStatus(id){
+    submissionStatus(id) {
         return this.httpClient.get(this.url + '/' + id);
     }
 
@@ -67,7 +67,7 @@ export class SubmissionService {
      *  stdout : [string]
      * }
      */
-    submissionLog(id){
+    submissionLog(id) {
         return this.httpClient.get(this.url + '/' + id + '/log');
     }
 

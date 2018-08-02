@@ -4,13 +4,13 @@ import { apiConfig } from '../config/api.config';
 
 @Injectable()
 export class UserService {
-    
-    private url = apiConfig.apiUrl + "/users";
+
+    private url = apiConfig.apiUrl + '/users';
 
     constructor(private httpClient: HttpClient) { }
-    
+
     /**
-     * Insert a new authorized user email into service.
+     * Insert a new authorized bigseaUser email into service.
      * @param user {
      *  username: string,
      *  password: string,
@@ -20,18 +20,18 @@ export class UserService {
      *  email: string
      * }
      */
-    newUser(user){
+    newUser(user) {
         return this.httpClient.post(this.url, user);
     }
 
     /**
-     * Check if the user email already authorized in the system.
+     * Check if the bigseaUser email already authorized in the system.
      * @param id : string
      * @returns <Observable> {
      *  email: string
      * }
      */
-    validateUser(email){
+    validateUser(email) {
         return this.httpClient.get(this.url + '/' + email);
     }
 
