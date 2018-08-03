@@ -41,8 +41,6 @@ def new_user(data):
     sucess = api.user_admin == username and api.password_admin == password
     authorization = {'success':sucess}
 
-    import pdb; pdb.set_trace()
-
     if not authorization['success']:
         API_LOG.log("Unauthorized request")
         raise ex.UnauthorizedException()
@@ -109,23 +107,25 @@ def run_submission(data):
 
 def stop_submission(submission_id, data):
 
-        if submission_id not in submissions.keys():
-            raise ex.BadRequestException()
+    if submission_id not in submissions.keys():
+        raise ex.BadRequestException()
 
         # TODO: Call the executor by submission_id and stop the execution.
 
-        return submissions[submission_id]
+    return submissions[submission_id]
 
 
 def list_submissions():
-    submissions_status = {}
+    submissions_status = []
 
     for id in submissions.keys():
         this_status = {}
-        submissions_status[id] = this_status
+        this_status['id'] = id
 
         this_status['status'] = (submissions[id].
                                  get_application_state())
+
+	submissions_status.append(this_status)
 
     return submissions_status
 
@@ -154,7 +154,7 @@ def submission_log(submission_id):
     if submission_id not in submissions.keys():
         API_LOG.log("Wrong request")
         raise ex.BadRequestException()
-
+  
     logs = {'execution':'', 'stderr':'', 'stdout': ''}
 
     exec_log = open("logs/apps/%s/execution" % submission_id, "r")
