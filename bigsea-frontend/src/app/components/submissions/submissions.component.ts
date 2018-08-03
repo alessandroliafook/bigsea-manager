@@ -127,7 +127,7 @@ export class SubmissionsComponent implements OnInit {
 
     () => {
       this.toggleSubmission();
-      this.newSubmission = {};
+      this.newSubmission = '';
 
       this.reloadSubmissions();
     });

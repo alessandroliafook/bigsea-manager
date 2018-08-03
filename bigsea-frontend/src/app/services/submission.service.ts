@@ -30,7 +30,7 @@ export class SubmissionService {
      */
     stopSubmission(id) {
         const user = {};
-        return this.httpClient.put(this.url + '/' + id + '/stop', user);
+        return this.httpClient.patch(this.url + '/' + id + '/stop', user);
     }
 
     /**
