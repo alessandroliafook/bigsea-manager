@@ -21,13 +21,6 @@ from flask_cors import CORS
 rest = u.Rest('v10', __name__)
 CORS(rest)
 
-@rest.post('/hello')
-def hello(data):
-    user_email = str(u.flask.request.headers['Authorization'])
-    api.validate_user(user_email)
-    username = data['username']
-    hello = 'Hello ' + str(username) + " " + str(user_email)
-    return u.render(hello)
 
 """ Insert new user email into the system.
 
