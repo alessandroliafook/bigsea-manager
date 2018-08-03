@@ -64,7 +64,7 @@ export class SubmissionsComponent implements OnInit {
 
   registerUser() {
 
-    console.log(this.user);
+    // console.log(this.user);
 
     this.userService.newUser(this.user).subscribe(result => {
         this.showNotification = true;
@@ -118,15 +118,16 @@ export class SubmissionsComponent implements OnInit {
 
     obs.subscribe((result) => {
       // this.toggleSubmission();
-      console.log(result);
+      // console.log(result);
     },
 
     (err) => {
-      console.log(err);
+      // console.log(err);
+      this.isSelectingSubType = false;
     },
 
     () => {
-      this.toggleSubmission();
+      this.isSelectingSubType = false;
       this.newSubmission = '';
 
       this.reloadSubmissions();

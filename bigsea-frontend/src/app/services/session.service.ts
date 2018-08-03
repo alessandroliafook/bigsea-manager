@@ -8,7 +8,7 @@ import { Router } from '../../../node_modules/@angular/router';
 @Injectable()
 export class SessionService {
 
-    private url = apiConfig.apiUrl + "/users";
+    private url = apiConfig.apiUrl + '/users';
 
     constructor(
         private httpClient: HttpClient,
@@ -16,27 +16,27 @@ export class SessionService {
         private router: Router
     ) { }
 
-    signIn(){
+    signIn() {
         this.socialAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then(
             user => {
-                let authUser = new BigseaUser(user.email, user.name, user.photoUrl);
+                const authUser = new BigseaUser(user.email, user.name, user.photoUrl);
                 localStorage.setItem('bigseaUser', JSON.stringify(authUser));
                 this.router.navigate(['/submissions']);
             }
         );
     }
 
-    signOut(){
+    signOut() {
         localStorage.removeItem('bigseaUser');
         this.socialAuth.signOut();
     }
 
-    recoveryUserFromStorage(){
-        let user: BigseaUser = JSON.parse(localStorage.getItem('bigseaUser'))
+    recoveryUserFromStorage() {
+        const user: BigseaUser = JSON.parse(localStorage.getItem('bigseaUser'));
         return user;
     }
 
-    isSignedIn(){
+    isSignedIn() {
         return localStorage.getItem('bigseaUser') !== null;
     }
 
