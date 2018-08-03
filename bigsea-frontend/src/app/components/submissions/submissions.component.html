@@ -27,7 +27,7 @@
           <div class="navbar-item">
             <div class="field is-grouped">
               <p class="control">
-                <a class="button is-danger" (click)="signOut()">
+                <a class="button is-danger"  (click)="signOut()">
                   <span class="icon">
                     <i class="fas fa-sign-out-alt"></i>
                   </span>
@@ -59,7 +59,13 @@
     <section class="submission-list">
 
       <div class="submission-list-item" *ngFor="let submission of submissions">
-        {{submission.status}}
+        <span>
+          Submission: {{submission.id}}
+        </span>
+
+        <span style="float: right">
+         Status: {{submission.status}}
+        </span>
       </div>
 
     </section>
@@ -81,19 +87,19 @@
 
       <div class="field">
         <div class="control">
-          <input class="input" type="text" placeholder="Enter username" ngModel="user.username">
+          <input class="input" type="text" placeholder="Enter username" [(ngModel)]="user.username">
         </div>
       </div>
 
       <div class="field">
         <div class="control">
-          <input class="input" type="password" placeholder="Enter password" ngModel="user.password">
+          <input class="input" type="password" placeholder="Enter password" [(ngModel)]="user.password">
         </div>
       </div>
 
       <div class="field">
         <div class="control">
-          <input class="input" type="email" placeholder="Enter email" ngModel="user.email">
+          <input class="input" type="email" placeholder="Enter email" [(ngModel)]="user.email">
         </div>
       </div>
 
@@ -129,17 +135,7 @@
       </div>
 
       <div *ngIf="submission.type === '1'" class="field">
-        <div class="field">
-          <div class="control">
-            <input class="input" type="text" placeholder="Enter plugin" [(ngModel)]="submission.plugin">
-          </div>
-        </div>
-
-        <div class="field">
-          <div class="control">
-            <input class="input" type="text" placeholder="Enter plugin info" [(ngModel)]="submission.plugin_info">
-          </div>
-        </div>
+        <textarea class="textarea" [(ngModel)]="newSubmission"></textarea>
       </div>
 
 
@@ -149,7 +145,6 @@
             <select name="subTypeSelect" [(ngModel)]="submission.type">
               <option value="1"> Submit and Run</option>
               <option value="2"> Stop</option>
-              <option value="3"> Status</option>
               <option value="4"> Log</option>
             </select>
           </div>
@@ -167,7 +162,11 @@
 
 <!--NEW SUBMISSION MODAL-->
 
+<!--NOTIFICATION-->
+
 <div class="notification is-info" [ngClass]="{'is-hidden': !showNotification}" style="z-index: 999999999">
   <button class="delete" (click)="dismissNotification()"></button>
   {{notification}}
 </div>
+
+<!--NOTIFICATION-->

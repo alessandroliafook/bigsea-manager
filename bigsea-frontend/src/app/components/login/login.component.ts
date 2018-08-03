@@ -15,12 +15,12 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this.sessionService.isSignedIn()){
+    if (this.sessionService.isSignedIn()) {
       this.router.navigate(['/submissions']);
     }
   }
 
-  signInWithGoogle(){
+  signInWithGoogle() {
     this.sessionService.signIn();
   }
 

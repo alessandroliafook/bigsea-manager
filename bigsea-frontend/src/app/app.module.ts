@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
-import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login'
+import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 
 import { UserService } from './services/user.service';
 import { SubmissionService } from './services/submission.service';
@@ -18,15 +18,16 @@ import { SubmissionsComponent } from './components/submissions/submissions.compo
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import {FormsModule} from '@angular/forms';
+import {AuthInterceptor} from './interceptor/auth.interceptor';
 
-let config = new AuthServiceConfig([
+const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
     provider: new GoogleLoginProvider('296465468035-a9imidndm0olna0ordgb8ouq64l40ohf.apps.googleusercontent.com')
   },
-])
+]);
 
-export function provideConfig(){
+export function provideConfig() {
   return config;
 }
 
@@ -54,7 +55,11 @@ export function provideConfig(){
       useFactory: provideConfig
     },
     SessionService,
-    AuthGuard
+    AuthGuard,
+
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+
+
   ],
   bootstrap: [AppComponent]
 })
