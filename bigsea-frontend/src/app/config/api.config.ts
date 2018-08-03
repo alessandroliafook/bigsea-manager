@@ -1,3 +1,3 @@
 export const apiConfig = {
-    apiUrl: 'http://0.0.0.0:1500'
+    apiUrl: 'http://150.165.85.59:1500'
 };

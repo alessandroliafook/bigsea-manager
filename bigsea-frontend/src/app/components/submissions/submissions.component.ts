@@ -18,6 +18,7 @@ export class SubmissionsComponent implements OnInit {
   notification = '';
   showNotification = false;
   isSelectingSubType = false;
+  newSubmission: any;
   user: any = {
     username: '',
     password: '',
@@ -45,6 +46,12 @@ export class SubmissionsComponent implements OnInit {
   ngOnInit() {
 
     this.submissionService.listSubmissions().subscribe(result => {
+      // console.log(result);
+
+      if (Object.keys(result).length === 0 && result.constructor === Object) {
+        return;
+      }
+
       this.submissions = result;
     });
 
@@ -56,6 +63,9 @@ export class SubmissionsComponent implements OnInit {
   }
 
   registerUser() {
+
+    console.log(this.user);
+
     this.userService.newUser(this.user).subscribe(result => {
         this.showNotification = true;
         this.notification = 'Successfully registered ' + this.user.email + '!';
@@ -69,7 +79,13 @@ export class SubmissionsComponent implements OnInit {
 
   reloadSubmissions() {
     this.submissionService.listSubmissions().subscribe((result) => {
+
+      if (Object.keys(result).length === 0 && result.constructor === Object) {
+        return;
+      }
+
       this.submissions = result;
+
     });
   }
 
@@ -79,7 +95,9 @@ export class SubmissionsComponent implements OnInit {
     switch (this.submission.type) {
 
       case '1':
-        obs = this.submissionService.submitAndRun(this.submission);
+        this.newSubmission = JSON.parse(this.newSubmission);
+        console.log(this.newSubmission);
+        obs = this.submissionService.submitAndRun(this.newSubmission);
         break;
 
       case '2':
@@ -91,22 +109,27 @@ export class SubmissionsComponent implements OnInit {
         break;
 
       case '4':
+        // let id = this.submission.id;
+        // console.log(id.replace('os', ''));
         obs = this.submissionService.submissionLog(this.submission.id);
         break;
 
     }
 
     obs.subscribe((result) => {
-      this.toggleSubmission();
+      // this.toggleSubmission();
       console.log(result);
     },
-    
+
     (err) => {
-      this.toggleSubmission();
+      console.log(err);
     },
-    
+
     () => {
       this.toggleSubmission();
+      this.newSubmission = {};
+
+      this.reloadSubmissions();
     });
   }
 
