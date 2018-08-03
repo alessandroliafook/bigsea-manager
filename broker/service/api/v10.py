@@ -21,7 +21,6 @@ from broker.utils.framework import optimizer
 from broker import exceptions as ex
 import os.path as path
 
-
 API_LOG = Log("APIv10", "logs/APIv10.log")
 
 submissions = {}

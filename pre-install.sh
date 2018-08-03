@@ -8,4 +8,4 @@ sudo pip install tox
 sudo pip install flake8
 sudo apt-get install nodejs
 sudo apt-get install npm
-npm install -g @angular/cli
+sudo npm install -g @angular/cli
