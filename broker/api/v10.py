@@ -20,8 +20,6 @@ from flask_cors import CORS
 
 rest = u.Rest('v10', __name__)
 CORS(rest)
-
-
 """ Insert new user email into the system.
 
     Normal response codes: 202
