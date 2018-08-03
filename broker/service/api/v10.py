@@ -80,7 +80,6 @@ def _get_authorized_users():
         if path.isfile(api.users): 
             r = open(api.users)
             users = r.readline().split(';')
-            print users
             r.close()
 
             return users
@@ -111,7 +110,6 @@ def stop_submission(submission_id, data):
         raise ex.BadRequestException()
 
         # TODO: Call the executor by submission_id and stop the execution.
-
     return submissions[submission_id]
 
 
